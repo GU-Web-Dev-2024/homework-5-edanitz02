@@ -13,24 +13,30 @@ const newArtworks = [
 ];
 // Add your JavaScript code here.
 
-let panels = document.getElementsByClassName("art-panel");
+
 let viewCountButton = document.getElementById("counter");
 const resetButton = document.getElementById("reset-button");
 const addArtButton = document.getElementById("add-art-button"); 
 let viewCount = 0;
+let panels = document.getElementsByClassName("art-panel");
+logPanels();
 
 
+function logPanels() {
+    panels = document.getElementsByClassName("art-panel");
 
-for(let panel of panels) {
-    panel.addEventListener("click", function (){
-        if(panel.style.getPropertyValue("background-color") == "") {
-            viewCount++;
-            viewCountButton.textContent = "Artworks Viewed: " + viewCount;
-        }
-        panel.style.backgroundColor = "aqua";
-        
-    });
+    for(let panel of panels) {
+        panel.addEventListener("click", function (){
+            if(panel.style.getPropertyValue("background-color") == "") {
+                viewCount++;
+                viewCountButton.textContent = "Artworks Viewed: " + viewCount;
+            }
+            panel.style.backgroundColor = "aqua";
+            
+        });
+    }
 }
+
 
 resetButton.addEventListener("click", ()=>{
     viewCount = 0;
@@ -75,4 +81,6 @@ addArtButton.addEventListener("click", ()=>{
 
     //got element by class name, so accessing the first elem of the array
     panelParent[0].appendChild(newPanel);
+
+    logPanels();
 });
