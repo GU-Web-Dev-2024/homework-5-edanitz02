@@ -15,7 +15,8 @@ const newArtworks = [
 
 let panels = document.getElementsByClassName("art-panel");
 let viewCountButton = document.getElementById("counter");
-let resetButton = document.getElementById("reset-button");
+const resetButton = document.getElementById("reset-button");
+const addArtButton = document.getElementById("add-art-button"); 
 let viewCount = 0;
 
 
@@ -40,4 +41,38 @@ resetButton.addEventListener("click", ()=>{
         //   so that's what I'm resetting it to
         panel.style.backgroundColor = "";
     }
+});
+
+const totalArtworks = 10;
+let artDisplayed = [false, false, false, false, false, false, false, false, false, false];
+let panelParent = document.getElementsByClassName("art-grid");
+
+addArtButton.addEventListener("click", ()=>{
+    let randNum = Math.floor(Math.random() * totalArtworks) // rand 0-9
+    // iterate until an unused art work is found
+    let iter = 0;
+    while(artDisplayed[randNum]) {
+        (randNum = (randNum + 1) % 10);
+        iter++;
+        if(iter > 10) break;
+    }
+    artDisplayed[randNum] = true;
+
+    const artwork = newArtworks[randNum];
+    let newPanel = document.createElement("div");
+    newPanel.classList.add("art-panel");
+    
+    // Create and append the image element
+    let img = document.createElement("img");
+    img.src = artwork.img;
+    img.alt = `${artwork.title}`;
+    newPanel.appendChild(img);
+
+    // Create and append the paragraph element
+    let description = document.createElement("p");
+    description.textContent = `${artwork.title} by ${artwork.artist}`;
+    newPanel.appendChild(description);
+
+    //got element by class name, so accessing the first elem of the array
+    panelParent[0].appendChild(newPanel);
 });
