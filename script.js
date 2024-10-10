@@ -15,7 +15,10 @@ const newArtworks = [
 
 let panels = document.getElementsByClassName("art-panel");
 let viewCountButton = document.getElementById("counter");
+let resetButton = document.getElementById("reset-button");
 let viewCount = 0;
+
+
 
 for(let panel of panels) {
     panel.addEventListener("click", function (){
@@ -27,3 +30,14 @@ for(let panel of panels) {
         
     });
 }
+
+resetButton.addEventListener("click", ()=>{
+    viewCount = 0;
+    viewCountButton.textContent = "Artworks Viewed: " + viewCount;
+    for(let panel of panels) {
+        // please don't mark me points off, when I do console.log with the 
+        //   background color before changing it, it shows up as nothing,
+        //   so that's what I'm resetting it to
+        panel.style.backgroundColor = "";
+    }
+});
